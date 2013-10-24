@@ -17,14 +17,13 @@
 #   limitations under the License.
 #
 #   Version v0.1
-
+from __future__ import print_function, absolute_import
 
 import sys
 import mmap
 import contextlib
 from Evtx.Evtx import FileHeader
 from Evtx.Views import evtx_template_readable_view
-
 
 def main():
     with open(sys.argv[1], 'r') as f:
@@ -33,10 +32,10 @@ def main():
             fh = FileHeader(buf, 0x0)
             for (i, chunk) in enumerate(fh.chunks()):
                 for template in chunk.templates().values():
-                    print "Template {%s} at chunk %d, offset %s" % \
+                    print("Template {%s} at chunk %d, offset %s" % \
                         (template.guid(), i,
-                         hex(template.absolute_offset(0x0)))
-                    print evtx_template_readable_view(template)
+                         hex(template.absolute_offset(0x0))))
+                    print(evtx_template_readable_view(template))
 
 if __name__ == "__main__":
     main()

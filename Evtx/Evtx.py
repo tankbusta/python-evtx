@@ -17,18 +17,20 @@
 #   limitations under the License.
 #
 #   Version v.0.3.0
+from __future__ import print_function
+
 import re
 import binascii
 import mmap
 from functools import wraps
 
-from BinaryParser import ParseException
-from BinaryParser import Block
-from BinaryParser import debug
-from BinaryParser import warning
-from Nodes import NameStringNode
-from Nodes import TemplateNode
-from Nodes import RootNode
+from .BinaryParser import ParseException
+from .BinaryParser import Block
+from .BinaryParser import debug
+from .BinaryParser import warning
+from .Nodes import NameStringNode
+from .Nodes import TemplateNode
+from .Nodes import RootNode
 
 
 class InvalidRecordException(ParseException):
@@ -333,7 +335,7 @@ class ChunkHeader(Block):
     def _load_strings(self):
         if self._strings is None:
             self._strings = {}
-        for i in xrange(64):
+        for i in range(64):
             ofs = self.unpack_dword(0x80 + (i * 4))
             while ofs > 0:
                 string_node = self.add_string(ofs)
@@ -368,7 +370,7 @@ class ChunkHeader(Block):
         """
         if self._templates is None:
             self._templates = {}
-        for i in xrange(32):
+        for i in range(32):
             ofs = self.unpack_dword(0x180 + (i * 4))
             while ofs > 0:
                 # unclear why these are found before the offset

@@ -1,3 +1,5 @@
+from __future__ import print_function, absolute_import
+
 from lxml.etree import XMLSyntaxError
 from Evtx.Evtx import Evtx
 from Evtx.Views import evtx_file_xml_view
@@ -26,8 +28,7 @@ def main():
                 continue
             if args.eid != int(get_child(get_child(node, "System"), "EventID").text):
                 continue
-            print record.record_num()
-
+            print(record.record_num())
 
 if __name__ == "__main__":
     main()

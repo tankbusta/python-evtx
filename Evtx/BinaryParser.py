@@ -17,6 +17,7 @@
 #   limitations under the License.
 #
 #   Version v.0.3.0
+from __future__ import print_function, absolute_import
 
 import sys
 import struct
@@ -25,35 +26,34 @@ from functools import partial
 
 verbose = False
 
-
 def debug(*message):
     """
     TODO(wb): replace with logging
     """
     global verbose
     if verbose:
-        print "# [d] %s" % (", ".join(map(str, message)))
+        print("# [d] %s" % (", ".join(map(str, message))))
 
 
 def warning(message):
     """
     TODO(wb): replace with logging
     """
-    print "# [w] %s" % (message)
+    print("# [w] %s" % (message))
 
 
 def info(message):
     """
     TODO(wb): replace with logging
     """
-    print "# [i] %s" % (message)
+    print("# [i] %s" % (message))
 
 
 def error(message):
     """
     TODO(wb): replace with logging
     """
-    print "# [e] %s" % (message)
+    print("# [e] %s" % (message))
     sys.exit(-1)
 
 

@@ -15,15 +15,16 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+from __future__ import print_function, absolute_import
+
 import re
 import itertools
 import base64
 
-from BinaryParser import Block
-from BinaryParser import hex_dump
-from BinaryParser import ParseException
-from BinaryParser import memoize
-
+from .BinaryParser import Block
+from .BinaryParser import hex_dump
+from .BinaryParser import ParseException
+from .BinaryParser import memoize
 
 class SYSTEM_TOKENS:
     EndOfStreamToken = 0x00
@@ -1378,7 +1379,6 @@ class BooleanTypeNode(VariantTypeNode):
             return "True"
         return "False"
 
-
 class BinaryTypeNode(VariantTypeNode):
     """
     Variant type 0x0E.
@@ -1402,7 +1402,6 @@ class BinaryTypeNode(VariantTypeNode):
     def string(self):
         return base64.b64encode(self.binary())
 
-
 class GuidTypeNode(VariantTypeNode):
     """
     Variant type 0x0F.
@@ -1417,7 +1416,6 @@ class GuidTypeNode(VariantTypeNode):
 
     def string(self):
         return "{%s}" % (self.guid())
-
 
 class SizeTypeNode(VariantTypeNode):
     """
@@ -1443,7 +1441,6 @@ class SizeTypeNode(VariantTypeNode):
     def string(self):
         return str(self.num())
 
-
 class FiletimeTypeNode(VariantTypeNode):
     """
     Variant type 0x11.
@@ -1459,7 +1456,6 @@ class FiletimeTypeNode(VariantTypeNode):
     def tag_length(self):
         return 8
 
-
 class SystemtimeTypeNode(VariantTypeNode):
     """
     Variant type 0x12.
@@ -1474,7 +1470,6 @@ class SystemtimeTypeNode(VariantTypeNode):
 
     def string(self):
         return self.systemtime().isoformat("T") + "Z"
-
 
 class SIDTypeNode(VariantTypeNode):
     """
@@ -1509,7 +1504,6 @@ class SIDTypeNode(VariantTypeNode):
     def string(self):
         return self.id()
 
-
 class Hex32TypeNode(VariantTypeNode):
     """
     Variant type 0x14.
@@ -1527,7 +1521,6 @@ class Hex32TypeNode(VariantTypeNode):
         for c in self.hex()[::-1]:
             ret += "%02x" % (ord(c))
         return ret
-
 
 class Hex64TypeNode(VariantTypeNode):
     """
@@ -1547,7 +1540,6 @@ class Hex64TypeNode(VariantTypeNode):
             ret += "%02x" % (ord(c))
         return ret
 
-
 class BXmlTypeNode(VariantTypeNode):
     """
     Variant type 0x21.
@@ -1565,7 +1557,6 @@ class BXmlTypeNode(VariantTypeNode):
 
     def root(self):
         return self._root
-
 
 class WstringArrayTypeNode(VariantTypeNode):
     """
@@ -1608,7 +1599,6 @@ class WstringArrayTypeNode(VariantTypeNode):
                 raise "Error parsing uneven substring of NULLs"
             bin = bin[len(frag):]
         return "".join(acc)
-
 
 node_dispatch_table = [
     EndOfStreamNode,

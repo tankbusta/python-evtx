@@ -17,13 +17,14 @@
 #   limitations under the License.
 #
 #   Version v.0.1
+from __future__ import print_function, absolute_import
+
 import re
 import xml.dom.minidom as minidom
 from xml.parsers.expat import ExpatError
 
 from Evtx.Evtx import Evtx
 from Evtx.Views import evtx_record_xml_view
-
 
 def prettify_xml(xml_string):
     """
@@ -39,7 +40,6 @@ def prettify_xml(xml_string):
         if len(line) > 0:
             ret += "\n"
     return ret
-
 
 def main():
     import argparse
@@ -58,16 +58,13 @@ def main():
             raise RuntimeError("Cannot find the record specified.")
 
         try:
-            print prettify_xml("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n%s" % evtx_record_xml_view(record))
+            print(prettify_xml("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n%s" % evtx_record_xml_view(record)))
         except ExpatError as e:
-            print "Exception: "
-            print repr(e)
-            print ""
-            print ""
-            print "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n%s" % evtx_record_xml_view(record)
-
-
+            print("Exception: ")
+            print(repr(e))
+            print("")
+            print("")
+            print("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n%s" % evtx_record_xml_view(record))
 
 if __name__ == "__main__":
     main()
-

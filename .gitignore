@@ -38,3 +38,5 @@ nosetests.xml
 need-to-fix/*
 testing-evtxs/*
 
+.Python
+include

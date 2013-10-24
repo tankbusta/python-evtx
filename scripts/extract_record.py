@@ -17,14 +17,14 @@
 #   limitations under the License.
 #
 #   Version v.0.1
+from __future__ import print_function, absolute_import
+
 import sys
+import argparse
 
 from Evtx.Evtx import Evtx
 
-
 def main():
-    import argparse
-
     parser = argparse.ArgumentParser(
         description="Write the raw data for a EVTX record to STDOUT")
     parser.add_argument("evtx", type=str,

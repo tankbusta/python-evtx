@@ -15,29 +15,29 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
-from Nodes import RootNode
-from Nodes import TemplateNode
-from Nodes import EndOfStreamNode
-from Nodes import OpenStartElementNode
-from Nodes import CloseStartElementNode
-from Nodes import CloseEmptyElementNode
-from Nodes import CloseElementNode
-from Nodes import ValueNode
-from Nodes import AttributeNode
-from Nodes import CDataSectionNode
-from Nodes import EntityReferenceNode
-from Nodes import ProcessingInstructionTargetNode
-from Nodes import ProcessingInstructionDataNode
-from Nodes import TemplateInstanceNode
-from Nodes import NormalSubstitutionNode
-from Nodes import ConditionalSubstitutionNode
-from Nodes import StreamStartNode
+from __future__ import print_function, absolute_import
 
+from .Nodes import RootNode
+from .Nodes import TemplateNode
+from .Nodes import EndOfStreamNode
+from .Nodes import OpenStartElementNode
+from .Nodes import CloseStartElementNode
+from .Nodes import CloseEmptyElementNode
+from .Nodes import CloseElementNode
+from .Nodes import ValueNode
+from .Nodes import AttributeNode
+from .Nodes import CDataSectionNode
+from .Nodes import EntityReferenceNode
+from .Nodes import ProcessingInstructionTargetNode
+from .Nodes import ProcessingInstructionDataNode
+from .Nodes import TemplateInstanceNode
+from .Nodes import NormalSubstitutionNode
+from .Nodes import ConditionalSubstitutionNode
+from .Nodes import StreamStartNode
 
 class UnexpectedElementException(Exception):
     def __init__(self, msg):
         super(UnexpectedElementException, self).__init__(msg)
-
 
 def _make_template_xml_view(root_node, cache=None):
     """
@@ -126,7 +126,6 @@ def _make_template_xml_view(root_node, cache=None):
         acc.append(sub_templ)
     return "".join(acc)
 
-
 def _build_record_xml(record, cache=None):
     """
     Note, the cache should be local to the Evtx.Chunk.
@@ -156,7 +155,6 @@ def _build_record_xml(record, cache=None):
     xml = xml.replace("&", "&amp;")
     return xml
 
-
 def evtx_record_xml_view(record, cache=None):
     """
     Generate an UTF-8 XML representation of an EVTX record.
@@ -171,7 +169,6 @@ def evtx_record_xml_view(record, cache=None):
     if cache is None:
         cache = {}
     return _build_record_xml(record, cache=cache).encode("utf8", "xmlcharrefreplace")
-
 
 def evtx_chunk_xml_view(chunk):
     """
@@ -188,7 +185,6 @@ def evtx_chunk_xml_view(chunk):
         record_str = _build_record_xml(record, cache=cache)
         yield record_str.encode("utf8", "xmlcharrefreplace"), record
 
-
 def evtx_file_xml_view(file_header):
     """
     Generate UTF-8 XML representations of the records in an EVTX file.
@@ -204,7 +200,6 @@ def evtx_file_xml_view(file_header):
         for record in chunk.records():
             record_str = _build_record_xml(record, cache=cache)
             yield record_str.encode("utf8", "xmlcharrefreplace"), record
-
 
 def evtx_template_readable_view(root_node, cache=None):
     """
@@ -278,4 +273,3 @@ def evtx_template_readable_view(root_node, cache=None):
         cache[templ_off] = sub_templ
         acc.append(sub_templ)
     return "".join(acc)
-

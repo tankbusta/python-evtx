@@ -1,3 +1,5 @@
+from __future__ import print_function, absolute_import
+
 from Evtx.Evtx import Evtx
 from Evtx.Nodes import RootNode
 from Evtx.Nodes import BXmlTypeNode
@@ -5,7 +7,6 @@ from Evtx.Nodes import TemplateInstanceNode
 from Evtx.Nodes import VariantTypeNode
 from Evtx.BinaryParser import hex_dump
 from Evtx.Views import evtx_record_xml_view
-
 
 def describe_root(record, root, indent=0, suppress_values=False):
     """
@@ -81,14 +82,14 @@ def main():
     args = parser.parse_args()
 
     with Evtx(args.evtx) as evtx:
-        print hex_dump(evtx.get_record(args.record).data())
+        print(hex_dump(evtx.get_record(args.record).data()))
 
         print("record(absolute_offset=%s)" % \
                   (evtx.get_record(args.record).offset()))
-        print describe_root(evtx.get_record(args.record),
+        print(describe_root(evtx.get_record(args.record),
                             evtx.get_record(args.record).root(),
-                            suppress_values=args.suppress_values)
-        print evtx_record_xml_view(evtx.get_record(args.record))
+                            suppress_values=args.suppress_values))
+        print(evtx_record_xml_view(evtx.get_record(args.record)))
 
 
 if __name__ == "__main__":

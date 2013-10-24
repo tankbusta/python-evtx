@@ -1,4 +1,5 @@
-
+Willi Ballenthin <william.ballenthin@mandiant.com>
+Christopher Schmitt <chris.schmitt@mandiant.com>
 
 Thanks to the following contributors for submitting issues, patches, and experiences to python-evtx:
 
